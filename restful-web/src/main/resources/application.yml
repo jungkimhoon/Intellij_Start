@@ -1,12 +1,23 @@
 server:
   port: 8088
 
+logging:
+  level:
+    org.springframework: DEBUG
+
 spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      database-platform: org.hibernate.dialect.Oracle10gDialect
+    database: oracle
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521/xe
     username: c##java
     password: 123
+    platform: oracle
   messages:
     basename: messages
   http:
@@ -15,6 +26,15 @@ spring:
       enabled: true
       force: true
 
-logging:
-  level:
-    org.springframework: DEBUG
+#  security:
+#    user:
+#      name: username
+#      password: passw0rd
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
