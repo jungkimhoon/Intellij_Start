@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -39,4 +41,16 @@ public class User {
 
     @ApiModelProperty(notes = "사용자의 패스워드를 입력해 주세요")
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+
+    public User(int id, String name, Date joinDate, String ssn, String password) {
+        this.id = id;
+        this.name = name;
+        this.joinDate = joinDate;
+        this.ssn = ssn;
+        this.password = password;
+    }
 }
